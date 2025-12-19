@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🍌 banana clock 🍌</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg,
+        #2ecc71,
+        #f1c40f,
+        #e67e22,
+        #1abc9c
+      );
+      font-family: "Comic Sans MS", "Trebuchet MS", sans-serif;
+      animation: rainbowShift 12s infinite alternate;
+    }
+
+    @keyframes rainbowShift {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(60deg); }
+    }
+
+    .clock {
+      position: relative;
+      background: rgba(0, 0, 0, 0.4);
+      border: 5px solid #ffe066;
+      border-radius: 30px;
+      padding: 30px 50px;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(255, 255, 0, 0.7);
+      z-index: 2;
+    }
+
+    .title {
+      font-size: 2.3rem;
+      color: #fff176;
+      text-shadow: 0 0 10px #000;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #b2ff59;
+      margin-bottom: 18px;
+    }
+
+    .time {
+      font-size: 3.6rem;
+      color: #ffffff;
+      text-shadow: 0 0 14px #2ecc71;
+    }
+
+    .ampm {
+      font-size: 1.4rem;
+      color: #ffe066;
+      margin-top: 5px;
+    }
+
+    .fruit-bar {
+      margin-top: 18px;
+      font-size: 2rem;
+      letter-spacing: 8px;
+      animation: fruitGlow 3s infinite alternate;
+    }
+
+    @keyframes fruitGlow {
+      from { filter: drop-shadow(0 0 5px yellow); }
+      to { filter: drop-shadow(0 0 15px lime); }
+    }
+
+    /* Floating fruits */
+    .fruit {
+      position: absolute;
+      font-size: 2.5rem;
+      animation: float 8s infinite ease-in-out;
+      opacity: 0.9;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(10deg); }
+      100% { transform: translateY(0) rotate(-10deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating jungle fruits -->
+  <div class="fruit" style="top:10%; left:15%;">🍍</div>
+  <div class="fruit" style="top:70%; left:20%; animation-delay:1s;">🥭</div>
+  <div class="fruit" style="top:20%; right:15%; animation-delay:2s;">🍉</div>
+  <div class="fruit" style="top:75%; right:18%; animation-delay:3s;">🍌</div>
+  <div class="fruit" style="top:40%; left:5%; animation-delay:4s;">🍓</div>
+  <div class="fruit" style="top:45%; right:5%; animation-delay:5s;">🍑</div>
+
+  <div class="clock">
+    <div class="title">🍌 Banana Clock 🍌</div>
+    <div class="subtitle">leafwing time</div>
+    <div class="subtitle"></div>
+<div class="approved"> sundew approved </div>
+
+    <div class="time" id="time">12:00:00</div>
+    <div class="ampm" id="ampm">AM</div>
+    <div class="fruit-bar">
+      🍌 🍍 🥭 🍉 🍓 🍑 🥥🍎
+    </div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+
+      let hours = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, "0");
+      const seconds = now.getSeconds().toString().padStart(2, "0");
+
+      const ampm = hours >= 12 ? "PM" : "AM";
+
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      hours = hours.toString().padStart(2, "0");
+
+      document.getElementById("time").textContent =
+        `${hours}:${minutes}:${seconds}`;
+      document.getElementById("ampm").textContent = ampm;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+
+</body>
+</html>
